@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import testgroup.model.Lesson;
 import testgroup.service.LessonService;
-import testgroup.service.Parser;
 
 import java.util.Collections;
 import java.util.List;
