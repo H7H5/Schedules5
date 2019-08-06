@@ -21,6 +21,12 @@
     <input type="hidden" name="groupp" value="teachers">
     <input type="submit" value="Select">
 </form>
+<c:url value="/select" var="var"/>
+<form action="${var}" method="GET">
+    <label>GroupJSON</label>
+    <input type="hidden" name="groupp" value="groups_json">
+    <input type="submit" value="Select">
+</form>
 
 
 

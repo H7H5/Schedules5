@@ -1,5 +1,6 @@
 package testgroup.controller;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import testgroup.model.Lesson;
 import testgroup.service.LessonService;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +35,7 @@ public class ScheduleController {
     public ModelAndView selectType(@ModelAttribute("groupp") String groupp){
         String gr = "groups";
         String te = "teachers";
+        String gr_json = "groups_json";
         ModelAndView modelAndView = new ModelAndView();
         if (groupp.equals(gr)){
             List<String> grup = lessonService.allGroup();
@@ -41,12 +44,31 @@ public class ScheduleController {
             modelAndView.setViewName("selectGroup");
             modelAndView.addObject("grup",grup);
 
-        }else{
+        }else if(groupp.equals(te)){
             List<String> teacher = lessonService.allTeacher();
             Collections.sort(teacher);
             teacher = teacher.stream().distinct().collect(Collectors.toList());
             modelAndView.setViewName("selectTeacher");
             modelAndView.addObject("teacher",teacher);
+        }else if(groupp.equals(gr_json)){
+           ArrayList<String> grup = (ArrayList<String>) lessonService.allGroup();
+           Collections.sort(grup);
+           grup = (ArrayList<String>) grup.stream().distinct().collect(Collectors.toList());
+           //JSONArray jsArray = new JSONArray(grup);
+           //String jsonText = jsArray.toString();
+           //System.out.print(jsonText);
+            String test2 = "";
+            test2 = test2.concat("{\"response\":[");
+            for (int i = 0 ;i < grup.size();i++){
+                if (i==0){
+                    test2 = test2.concat("\""+grup.get(i)+"\"");
+                }else {
+                    test2 = test2.concat(",\""+grup.get(i)+"\"");
+                }
+            }
+            test2 = test2.concat("]}");
+           modelAndView.setViewName("test");
+           modelAndView.addObject("grup",test2);
         }
         return modelAndView;
     }
