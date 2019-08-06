@@ -58,16 +58,17 @@ public class ScheduleController {
            //String jsonText = jsArray.toString();
            //System.out.print(jsonText);
             String test2 = "";
-            String test3 = "";
-            test2 = test2.concat("{\"response\":[");
+            test2 = test2.concat("{\"response\":[{");
             for (int i = 0 ;i < grup.size();i++){
-                if (i==0){
+                if (i==grup.size()-1){
+                    test2 = test2.concat("\""+i+"\":");
                     test2 = test2.concat("\""+grup.get(i)+"\"");
                 }else {
-                    test2 = test2.concat(",\""+grup.get(i)+"\"");
+                    test2 = test2.concat("\""+i+"\":");
+                    test2 = test2.concat("\""+grup.get(i)+"\",");
                 }
             }
-            test2 = test2.concat("]}");
+            test2 = test2.concat("}]}");
            modelAndView.setViewName("test");
            modelAndView.addObject("grup",test2);
         }
