@@ -58,6 +58,7 @@ public class ScheduleController {
            //String jsonText = jsArray.toString();
            //System.out.print(jsonText);
             String test2 = "";
+            String test3 = "";
             test2 = test2.concat("{\"response\":[");
             for (int i = 0 ;i < grup.size();i++){
                 if (i==0){
