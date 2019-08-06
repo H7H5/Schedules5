@@ -36,6 +36,7 @@ public class ScheduleController {
         String gr = "groups";
         String te = "teachers";
         String gr_json = "groups_json";
+        String te_json = "teachers_json";
         ModelAndView modelAndView = new ModelAndView();
         if (groupp.equals(gr)){
             List<String> grup = lessonService.allGroup();
@@ -71,6 +72,24 @@ public class ScheduleController {
             test2 = test2.concat("}]}");
            modelAndView.setViewName("test");
            modelAndView.addObject("grup",test2);
+        }else if(groupp.equals(te_json)){
+            ArrayList<String> teacher = (ArrayList<String>) lessonService.allTeacher();
+            Collections.sort(teacher);
+            teacher = (ArrayList<String>) teacher.stream().distinct().collect(Collectors.toList());
+            String test2 = "";
+            test2 = test2.concat("{\"response\":[{");
+            for (int i = 0 ;i < teacher.size();i++){
+                if (i==teacher.size()-1){
+                    test2 = test2.concat("\""+i+"\":");
+                    test2 = test2.concat("\""+teacher.get(i)+"\"");
+                }else {
+                    test2 = test2.concat("\""+i+"\":");
+                    test2 = test2.concat("\""+teacher.get(i)+"\",");
+                }
+            }
+            test2 = test2.concat("}]}");
+            modelAndView.setViewName("test");
+            modelAndView.addObject("grup",test2);
         }
         return modelAndView;
     }
