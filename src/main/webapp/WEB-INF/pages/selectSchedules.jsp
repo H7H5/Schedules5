@@ -33,8 +33,5 @@
     <input type="hidden" name="groupp" value="teachers_json">
     <input type="submit" value="Select">
 </form>
-
-
-
 </body>
 </html>
