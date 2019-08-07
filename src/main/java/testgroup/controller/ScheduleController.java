@@ -191,8 +191,28 @@ public class ScheduleController {
     public ModelAndView SelectT(@PathVariable("teacher") String teacher) {
         List<Lesson> lessons = lessonService.allLessonTeacher(teacher);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("schedules");
-        modelAndView.addObject("lessonsList", lessons);
+        String test2 = "";
+        test2 = test2.concat("{\"response\":[");
+        for (int i = 0 ;i < lessons.size();i++){
+            if (i==lessons.size()-1) {
+                test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
+                test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
+                test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
+                test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
+                test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"}");
+            }else {
+                test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
+                test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
+                test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
+                test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
+                test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"},");
+            }
+        }
+        test2 = test2.concat("]}");
+        modelAndView.setViewName("test");
+        modelAndView.addObject("grup",test2);
         return modelAndView;
     }
 }
