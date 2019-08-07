@@ -78,6 +78,7 @@ public class ScheduleController {
             teacher = (ArrayList<String>) teacher.stream().distinct().collect(Collectors.toList());
             String test2 = "";
             test2 = test2.concat("{\"response\":[{");
+            String gvxcv = "vdfd";
             for (int i = 0 ;i < teacher.size();i++){
                 if (i==teacher.size()-1){
                     test2 = test2.concat("\""+i+"\":");
