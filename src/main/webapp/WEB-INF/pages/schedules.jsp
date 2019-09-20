@@ -5,6 +5,9 @@
     <title>LESSONS</title>
 </head>
 <body>
+<h2>Add</h2>
+<c:url value="/add" var="add"/>
+<a href="${add}">Add new lesson</a>
 
 <h2>Lessons</h2>
 <table>
@@ -36,8 +39,6 @@
     </c:forEach>
 </table>
 
-<h2>Add</h2>
-<c:url value="/add" var="add"/>
-<a href="${add}">Add new lesson</a>
+
 </body>
 </html>
