@@ -18,6 +18,7 @@
         <th>number</th>
         <th>name</th>
         <th>teacher</th>
+        <th>teacher2</th>
         <th>study</th>
         <th>numerator</th>
     </tr>
@@ -29,6 +30,7 @@
             <td>${lesson.number}</td>
             <td>${lesson.name}</td>
             <td>${lesson.teacher}</td>
+            <td>${lesson.teacher2}</td>
             <td>${lesson.study}</td>
             <td>${lesson.numerator}</td>
             <td>

@@ -39,6 +39,9 @@
     <label for="teacher">Teacher</label>
     <input type="text" name="teacher" id="teacher" value="${lesson.teacher}">
 
+    <label for="teacher">Teacher2</label>
+    <input type="text" name="teacher2" id="teacher2" value="${lesson.teacher2}">
+
     <label for="study">Study</label>
     <input type="text" name="study" id="study" value="${lesson.study}">
 

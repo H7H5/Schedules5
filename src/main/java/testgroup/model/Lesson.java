@@ -34,6 +34,9 @@ public class Lesson {
     @Column(name = "teacher")
     private String teacher;
 
+    @Column(name = "teacher2")
+    private String teacher2;
+
     @Column(name = "study")
     private String study;
 
@@ -81,6 +84,14 @@ public class Lesson {
         this.teacher = teacher;
     }
 
+    public String getTeacher2() {
+        return teacher2;
+    }
+
+    public void setTeacher2(String teacher2) {
+        this.teacher2 = teacher2;
+    }
+
     public String getStudy() {
         return study;
     }
@@ -106,6 +117,7 @@ public class Lesson {
                 ", number=" + number +
                 ", name='" + name + '\'' +
                 ", teacher='" + teacher + '\'' +
+                ", teacher2='" + teacher2 + '\'' +
                 ", study='" + study + '\'' +
                 ", numerator='" + numerator + '\'' +
                 '}';

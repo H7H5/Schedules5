@@ -35,8 +35,22 @@ public class LessonDAOImpl implements LessonDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Lesson> allLessonTeacher(String te) {
+        List<Lesson> lessons=allLessonTeacher1(te);
+        List<Lesson> lessons2=allLessonTeacher2(te);
+        for (int i =0;i <lessons2.size();i++){
+            lessons.add(lessons2.get(i));
+        }
+        return lessons;
+    }
+    public List<Lesson> allLessonTeacher1(String te) {
         String str = te+".";
         String sql = "FROM Lesson D WHERE D.teacher = '"+str+"'";
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery(sql).list();
+    }
+    public List<Lesson> allLessonTeacher2(String te) {
+        String str = te+".";
+        String sql = "FROM Lesson D WHERE D.teacher2 = '"+str+"'";
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery(sql).list();
     }
@@ -55,6 +69,16 @@ public class LessonDAOImpl implements LessonDAO {
         String sql = "select teacher from Lesson";
         Session session = sessionFactory.getCurrentSession();
         List<String> teachers = session.createQuery(sql).list();
+        String sql1 = "select teacher2 from Lesson";
+        Session session1 = sessionFactory.getCurrentSession();
+        List<String> teachers2 = session1.createQuery(sql1).list();
+        for (int i = 0;i<teachers2.size();i++){
+            if (teachers2.get(i)==null) {
+
+            }else {
+                teachers.add(teachers2.get(i));
+            }
+        }
         return teachers;
     }
 
