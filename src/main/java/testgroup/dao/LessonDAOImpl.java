@@ -75,6 +75,8 @@ public class LessonDAOImpl implements LessonDAO {
         for (int i = 0;i<teachers2.size();i++){
             if (teachers2.get(i)==null) {
 
+            }else if (teachers2.get(i).equals("")){
+
             }else {
                 teachers.add(teachers2.get(i));
             }
