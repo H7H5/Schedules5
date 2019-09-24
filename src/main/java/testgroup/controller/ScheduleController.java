@@ -170,6 +170,7 @@ public class ScheduleController {
                 test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
                 test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
                 test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
                 test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
                 test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
                 test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
@@ -178,6 +179,7 @@ public class ScheduleController {
                 test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
                 test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
                 test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
                 test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
                 test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
                 test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
@@ -200,6 +202,7 @@ public class ScheduleController {
                 test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
                 test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
                 test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
                 test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
                 test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
                 test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
@@ -208,6 +211,7 @@ public class ScheduleController {
                 test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
                 test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
                 test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
                 test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
                 test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
                 test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
