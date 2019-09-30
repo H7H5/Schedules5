@@ -205,7 +205,7 @@ public class ScheduleController {
             String text = "" + i;
             if (teacher.equals(text)){
                 tempTe = teachers.get(i);
-                tempTe.substring(0, tempTe.length() - 1);
+                tempTe=tempTe.substring(0, tempTe.length() - 1);
             }
         }
         List<Lesson> lessons = lessonService.allLessonTeacher(tempTe);
