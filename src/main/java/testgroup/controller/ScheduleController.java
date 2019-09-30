@@ -207,7 +207,7 @@ public class ScheduleController {
                // tempTe = teachers.get(i);
             //}
         //}
-        List<Lesson> lessons = lessonService.allLessonTeacher("Герасименко Ю.А.");
+        List<Lesson> lessons = lessonService.allLessonTeacher("Герасименко%20Ю.А.");
         ModelAndView modelAndView = new ModelAndView();
         String test2 = tempTe;
         test2 = test2.concat("{\"response\":[");
