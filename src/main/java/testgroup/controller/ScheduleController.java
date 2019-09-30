@@ -200,16 +200,16 @@ public class ScheduleController {
         //ArrayList<String> teachers = (ArrayList<String>) lessonService.allTeacher();
         //Collections.sort(teachers);
         //teachers = (ArrayList<String>) teachers.stream().distinct().collect(Collectors.toList());
-        String tempTe = "";
+        String tempTe = ""+teachers.size();
         for (int i = 0 ;i < teachers.size();i++){
             String text = "" + i;
             if (teacher.equals(text)){
-                tempTe = teachers.get(i);
+               // tempTe = teachers.get(i);
             }
         }
         List<Lesson> lessons = lessonService.allLessonTeacher(teacher);
         ModelAndView modelAndView = new ModelAndView();
-        String test2 = teacher;
+        String test2 = tempTe;
         test2 = test2.concat("{\"response\":[");
         for (int i = 0 ;i < lessons.size();i++){
             if (i==lessons.size()-1) {
