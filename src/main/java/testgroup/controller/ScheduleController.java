@@ -200,14 +200,15 @@ public class ScheduleController {
         //ArrayList<String> teachers = (ArrayList<String>) lessonService.allTeacher();
         //Collections.sort(teachers);
         //teachers = (ArrayList<String>) teachers.stream().distinct().collect(Collectors.toList());
-        String tempTe = ""+teachers.get(10);
-        //for (int i = 0 ;i < teachers.size();i++){
-          //  String text = "" + i;
-            //if (teacher.equals(text)){
-               // tempTe = teachers.get(i);
-            //}
-        //}
-        List<Lesson> lessons = lessonService.allLessonTeacher("Герасименко Ю.А");
+        String tempTe = "";
+        for (int i = 0 ;i < teachers.size();i++){
+            String text = "" + i;
+            if (teacher.equals(text)){
+                tempTe = teachers.get(i);
+                tempTe.substring(0, tempTe.length() - 1);
+            }
+        }
+        List<Lesson> lessons = lessonService.allLessonTeacher(tempTe);
         ModelAndView modelAndView = new ModelAndView();
         String test2 = tempTe;
         test2 = test2.concat("{\"response\":[");
