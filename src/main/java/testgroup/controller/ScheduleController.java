@@ -193,20 +193,23 @@ public class ScheduleController {
     }
     @RequestMapping(value = "/selectT/{teacher}", method = RequestMethod.GET)
     public ModelAndView SelectT(@PathVariable("teacher") String teacher) {
-        String test2 = "";
-        ArrayList<String> teachers = (ArrayList<String>) lessonService.allTeacher();
-        Collections.sort(teachers);
-        teachers = (ArrayList<String>) teachers.stream().distinct().collect(Collectors.toList());
-        String tempTe = "";
-        for (int i = 0 ;i < teachers.size();i++){
-            String text = "" + i;
-            if (teacher.equals(text)){
-                tempTe = teachers.get(i);
-            }
-        }
-        List<Lesson> lessons = lessonService.allLessonTeacher(tempTe);
-        ModelAndView modelAndView = new ModelAndView();
 
+        //List<String> teachers = lessonService.allTeacher();
+        //Collections.sort(teachers);
+        //teachers = teachers.stream().distinct().collect(Collectors.toList());
+        //ArrayList<String> teachers = (ArrayList<String>) lessonService.allTeacher();
+        //Collections.sort(teachers);
+        //teachers = (ArrayList<String>) teachers.stream().distinct().collect(Collectors.toList());
+        //String tempTe = "";
+        //for (int i = 0 ;i < teachers.size();i++){
+            //String text = "" + i;
+            //if (teacher==i){
+               // tempTe = teachers.get(2);
+            //}
+        //}
+        List<Lesson> lessons = lessonService.allLessonTeacher(teacher);
+        ModelAndView modelAndView = new ModelAndView();
+        String test2 = "";
         test2 = test2.concat("{\"response\":[");
         for (int i = 0 ;i < lessons.size();i++){
             if (i==lessons.size()-1) {
