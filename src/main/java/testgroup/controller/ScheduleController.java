@@ -37,6 +37,7 @@ public class ScheduleController {
         String te = "teachers";
         String gr_json = "groups_json";
         String te_json = "teachers_json";
+        String edit_group = "edit_group";
         ModelAndView modelAndView = new ModelAndView();
         if (groupp.equals(gr)){
             List<String> grup = lessonService.allGroup();
@@ -91,6 +92,13 @@ public class ScheduleController {
             test2 = test2.concat("}]}");
             modelAndView.setViewName("test");
             modelAndView.addObject("grup",test2);
+        }else if(groupp.equals(edit_group)){
+            List<Lesson> lessons = lessonService.allLesson();
+            modelAndView = new ModelAndView();
+            modelAndView.setViewName("schedules");
+            //modelAndView.setViewName("selectGroup");
+            modelAndView.addObject("lessonsList", lessons);
+
         }
         return modelAndView;
     }
@@ -191,15 +199,66 @@ public class ScheduleController {
         modelAndView.addObject("grup",test2);
         return modelAndView;
     }
+    @RequestMapping(value = "/editGroup/{grup}", method = RequestMethod.GET)
+    public ModelAndView EditGroup(@PathVariable("grup") String grup) {
+        List<Lesson> lessons = lessonService.allLessonGroup(grup);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("schedules");
+        //modelAndView.setViewName("selectGroup");
+        modelAndView.addObject("lessonsList", lessons);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/editTeacher/{teacher}", method = RequestMethod.GET)
+    public ModelAndView EditTeacher (@PathVariable("teacher") String teacher) {
+
+        List<String> teachers = lessonService.allTeacher();
+        Collections.sort(teachers);
+        teachers = teachers.stream().distinct().collect(Collectors.toList());
+        String tempTe = "";
+        for (int i = 0 ;i < teachers.size();i++){
+            String text = "" + i;
+            if (teacher.equals(text)){
+                tempTe = teachers.get(i);
+                tempTe=tempTe.substring(0, tempTe.length() - 1);
+            }
+        }
+        List<Lesson> lessons = lessonService.allLessonTeacher(tempTe);
+        ModelAndView modelAndView = new ModelAndView();
+        String test2="";
+        test2 = test2.concat("{\"response\":[");
+        for (int i = 0 ;i < lessons.size();i++){
+            if (i==lessons.size()-1) {
+                test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
+                test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
+                test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
+                test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
+                test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
+                test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
+                test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"}");
+            }else {
+                test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
+                test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
+                test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
+                test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
+                test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
+                test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
+                test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"},");
+            }
+        }
+        test2 = test2.concat("]}");
+        modelAndView.setViewName("test");
+        modelAndView.addObject("grup",test2);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/selectT/{teacher}", method = RequestMethod.GET)
     public ModelAndView SelectT(@PathVariable("teacher") String teacher) {
 
         List<String> teachers = lessonService.allTeacher();
         Collections.sort(teachers);
         teachers = teachers.stream().distinct().collect(Collectors.toList());
-        //ArrayList<String> teachers = (ArrayList<String>) lessonService.allTeacher();
-        //Collections.sort(teachers);
-        //teachers = (ArrayList<String>) teachers.stream().distinct().collect(Collectors.toList());
         String tempTe = "";
         for (int i = 0 ;i < teachers.size();i++){
             String text = "" + i;

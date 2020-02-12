@@ -18,7 +18,9 @@
             <td>
                 <a href="/select/${grup}">Select</a>
             </td>
-
+            <td>
+                <a href="/editGroup/${grup}">Edit</a>
+            </td>
         </tr>
     </c:forEach>
 </table>

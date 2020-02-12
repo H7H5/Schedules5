@@ -18,6 +18,9 @@
             <td>
                 <a href="/selectT/${teacher}">Select</a>
             </td>
+            <td>
+                <a href="/editTeacher/${teacher}">Edit</a>
+            </td>
 
         </tr>
     </c:forEach>
