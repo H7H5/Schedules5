@@ -39,5 +39,7 @@
     <input type="hidden" name="groupp" value="edit_group">
     <input type="submit" value="Select">
 </form>
+<c:url value="/replacements" var="replacements"/>
+<a href="${replacements}">All Replacements</a>
 </body>
 </html>

@@ -1,12 +1,14 @@
 package testgroup.controller;
 
-import org.json.JSONArray;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import testgroup.model.Lesson;
+import testgroup.model.Replacement;
 import testgroup.service.LessonService;
+import testgroup.service.ReplacementService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,12 +18,16 @@ import java.util.stream.Collectors;
 @Controller
 public class ScheduleController {
     private LessonService lessonService;
+    private ReplacementService replacementService;
 
     @Autowired
-    public void setFilmService(LessonService lessonService) {
+    public void setLessonService(LessonService lessonService) {
         this.lessonService = lessonService;
     }
-
+    @Autowired
+    public void setReplacementService(ReplacementService replacementService) {
+        this.replacementService = replacementService;
+    }
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView Select() {
         List<Lesson> lessons = lessonService.allLesson();
@@ -30,7 +36,6 @@ public class ScheduleController {
         modelAndView.addObject("lessonsList", lessons);
         return modelAndView;
     }
-
     @RequestMapping(value = "select",method = RequestMethod.GET)
     public ModelAndView selectType(@ModelAttribute("groupp") String groupp){
         String gr = "groups";
@@ -53,12 +58,12 @@ public class ScheduleController {
             modelAndView.setViewName("selectTeacher");
             modelAndView.addObject("teacher",teacher);
         }else if(groupp.equals(gr_json)){
-           ArrayList<String> grup = (ArrayList<String>) lessonService.allGroup();
-           Collections.sort(grup);
-           grup = (ArrayList<String>) grup.stream().distinct().collect(Collectors.toList());
-           //JSONArray jsArray = new JSONArray(grup);
-           //String jsonText = jsArray.toString();
-           //System.out.print(jsonText);
+            ArrayList<String> grup = (ArrayList<String>) lessonService.allGroup();
+            Collections.sort(grup);
+            grup = (ArrayList<String>) grup.stream().distinct().collect(Collectors.toList());
+            //JSONArray jsArray = new JSONArray(grup);
+            //String jsonText = jsArray.toString();
+            //System.out.print(jsonText);
             String test2 = "";
             test2 = test2.concat("{\"response\":[{");
             for (int i = 0 ;i < grup.size();i++){
@@ -71,8 +76,8 @@ public class ScheduleController {
                 }
             }
             test2 = test2.concat("}]}");
-           modelAndView.setViewName("test");
-           modelAndView.addObject("grup",test2);
+            modelAndView.setViewName("test");
+            modelAndView.addObject("grup",test2);
         }else if(groupp.equals(te_json)){
             ArrayList<String> teacher = (ArrayList<String>) lessonService.allTeacher();
             Collections.sort(teacher);
@@ -102,7 +107,6 @@ public class ScheduleController {
         }
         return modelAndView;
     }
-
     @RequestMapping(value = "schedules",method = RequestMethod.GET)
     public ModelAndView allLesson() {
         List<Lesson> lessons = lessonService.allLesson();
@@ -112,7 +116,14 @@ public class ScheduleController {
         modelAndView.addObject("lessonsList", lessons);
         return modelAndView;
     }
-
+    @RequestMapping(value = "/replacements",method = RequestMethod.GET)
+    public ModelAndView allReplacement(){
+        List<Replacement> replacements = replacementService.allReplacement();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("replacements");
+        modelAndView.addObject("replacementsList",replacements);
+        return modelAndView;
+    }
     @RequestMapping(value = "/schedulesGroup", method = RequestMethod.GET)
     public ModelAndView allLessonGroup(@ModelAttribute("groupp") String groupp){
         List<Lesson> lessons = lessonService.allLessonGroup(groupp);
@@ -138,11 +149,27 @@ public class ScheduleController {
         modelAndView.addObject("lesson", lessonService.getById(id));
         return modelAndView;
     }
+    @RequestMapping(value = "/editReplacement/{id}", method = RequestMethod.GET)
+    public ModelAndView editPageReplacement(@PathVariable("id") int id) {
+        Replacement replacement = replacementService.getById(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editPageReplacement");
+        modelAndView.addObject("replacement", replacement);
+        modelAndView.addObject("replacement", replacementService.getById(id));
+        return modelAndView;
+    }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editLesson(@ModelAttribute("lesson") Lesson lesson) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/schedules");
         lessonService.edit(lesson);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/editReplacement", method = RequestMethod.POST)
+    public ModelAndView editReplacement(@ModelAttribute("replacement") Replacement replacement) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/replacements");
+        replacementService.edit(replacement);
         return modelAndView;
     }
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -151,11 +178,24 @@ public class ScheduleController {
         modelAndView.setViewName("editPage");
         return modelAndView;
     }
+    @RequestMapping(value = "/addReplacement", method = RequestMethod.GET)
+    public ModelAndView addPageReplacement() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editPageReplacement");
+        return modelAndView;
+    }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addLesson(@ModelAttribute("lesson") Lesson lesson) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/schedules");
         lessonService.add(lesson);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/addReplacement", method = RequestMethod.POST)
+    public ModelAndView addReplacement(@ModelAttribute("replacement") Replacement replacement) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/replacements");
+        replacementService.add(replacement);
         return modelAndView;
     }
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
@@ -166,6 +206,15 @@ public class ScheduleController {
         lessonService.delete(lesson);
         return modelAndView;
     }
+    @RequestMapping(value="/deleteReplacement/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteReplacement(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/replacements");
+        System.out.println(id);
+        Replacement replacement = replacementService.getById(id);
+        replacementService.delete(replacement);
+        return modelAndView;
+    }
     @RequestMapping(value = "/select/{grup}", method = RequestMethod.GET)
     public ModelAndView Select(@PathVariable("grup") String grup) {
         List<Lesson> lessons = lessonService.allLessonGroup(grup);
@@ -174,29 +223,56 @@ public class ScheduleController {
         String test2 = "";
         test2 = test2.concat("{\"response\":[");
         for (int i = 0 ;i < lessons.size();i++){
+            String k;
             if (i==lessons.size()-1) {
-                test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
-                test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
-                test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
-                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
-                test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
-                test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
-                test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
-                test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"}");
+                k = "";
             }else {
-                test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
-                test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
-                test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
-                test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
-                test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
-                test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
-                test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
-                test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"},");
+                k=",";
             }
+            test2 = test2.concat("{\"name\":\"" + lessons.get(i).getName() + "\",");
+            test2 = test2.concat("\"group\":\"" + lessons.get(i).getGroupp() + "\",");
+            test2 = test2.concat("\"teacher\":\"" + lessons.get(i).getTeacher() + "\",");
+            test2 = test2.concat("\"teacher2\":\"" + lessons.get(i).getTeacher2() + "\",");
+            test2 = test2.concat("\"day\":\"" + lessons.get(i).getDay() + "\",");
+            test2 = test2.concat("\"study\":\"" + lessons.get(i).getStudy() + "\",");
+            test2 = test2.concat("\"numerator\":\"" + lessons.get(i).getNumerator() + "\",");
+            test2 = test2.concat("\"number\":\"" + lessons.get(i).getNumber() + "\"}"+k);
         }
         test2 = test2.concat("]}");
         modelAndView.setViewName("test");
         modelAndView.addObject("grup",test2);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/JsonReplacement", method = RequestMethod.GET)
+    public ModelAndView JsonReplacements( ){
+        List<Replacement> replacements = replacementService.allReplacement();
+        ModelAndView modelAndView = new ModelAndView();
+        // modelAndView.setViewName("schedules");
+        String test2 = "";
+        test2 = test2.concat("{\"response\":[");
+        for (int i = 0 ;i < replacements.size();i++){
+            String k;
+            if (i==replacements.size()-1) {
+                k = "";
+            }else {
+                k=",";
+            }
+            test2 = test2.concat("{\"group\":\"" + replacements.get(i).getGroupp() + "\",");
+            test2 = test2.concat("\"year\":\"" + replacements.get(i).getYear() + "\",");
+            test2 = test2.concat("\"month\":\"" + replacements.get(i).getMonth() + "\",");
+            test2 = test2.concat("\"day\":\"" + replacements.get(i).getDay() + "\",");
+            test2 = test2.concat("\"old_name\":\"" + replacements.get(i).getOld_name() + "\",");
+            test2 = test2.concat("\"old_teacher1\":\"" + replacements.get(i).getOld_teacher1() + "\",");
+            test2 = test2.concat("\"old_teacher2\":\"" + replacements.get(i).getNew_teacher2() + "\",");
+            test2 = test2.concat("\"old_study\":\"" + replacements.get(i).getOld_study() + "\",");
+            test2 = test2.concat("\"new_name\":\"" + replacements.get(i).getNew_name()+ "\",");
+            test2 = test2.concat("\"new_teacher1\":\"" + replacements.get(i).getNew_teacher1() + "\",");
+            test2 = test2.concat("\"new_teacher2\":\"" + replacements.get(i).getOld_teacher2() + "\",");
+            test2 = test2.concat("\"new_study\":\"" + replacements.get(i).getNew_study() + "\"}"+k);
+        }
+        test2 = test2.concat("]}");
+        modelAndView.setViewName("JsonReplacement");
+        modelAndView.addObject("replacements",test2);
         return modelAndView;
     }
     @RequestMapping(value = "/editGroup/{grup}", method = RequestMethod.GET)
@@ -252,7 +328,6 @@ public class ScheduleController {
         modelAndView.addObject("grup",test2);
         return modelAndView;
     }
-
     @RequestMapping(value = "/selectT/{teacher}", method = RequestMethod.GET)
     public ModelAndView SelectT(@PathVariable("teacher") String teacher) {
 
@@ -297,4 +372,5 @@ public class ScheduleController {
         modelAndView.addObject("grup",test2);
         return modelAndView;
     }
+
 }

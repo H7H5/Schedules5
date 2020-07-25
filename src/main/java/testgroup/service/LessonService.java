@@ -1,7 +1,6 @@
 package testgroup.service;
 
 import testgroup.model.Lesson;
-
 import java.util.List;
 
 public interface LessonService {

@@ -14,7 +14,7 @@
     <tr>
         <th>id</th>
         <th>group</th>
-        <th>day</th>
+        <th>night</th>
         <th>number</th>
         <th>name</th>
         <th>teacher</th>
