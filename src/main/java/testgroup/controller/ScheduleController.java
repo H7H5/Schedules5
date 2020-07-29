@@ -264,11 +264,11 @@ public class ScheduleController {
             test2 = test2.concat("\"number\":\"" + replacements.get(i).getNumber() + "\",");
             test2 = test2.concat("\"old_name\":\"" + replacements.get(i).getOld_name() + "\",");
             test2 = test2.concat("\"old_teacher1\":\"" + replacements.get(i).getOld_teacher1() + "\",");
-            test2 = test2.concat("\"old_teacher2\":\"" + replacements.get(i).getNew_teacher2() + "\",");
+            test2 = test2.concat("\"old_teacher2\":\"" + replacements.get(i).getOld_teacher2() + "\",");
             test2 = test2.concat("\"old_study\":\"" + replacements.get(i).getOld_study() + "\",");
             test2 = test2.concat("\"new_name\":\"" + replacements.get(i).getNew_name()+ "\",");
             test2 = test2.concat("\"new_teacher1\":\"" + replacements.get(i).getNew_teacher1() + "\",");
-            test2 = test2.concat("\"new_teacher2\":\"" + replacements.get(i).getOld_teacher2() + "\",");
+            test2 = test2.concat("\"new_teacher2\":\"" + replacements.get(i).getNew_teacher2() + "\",");
             test2 = test2.concat("\"new_study\":\"" + replacements.get(i).getNew_study() + "\"}"+k);
         }
         test2 = test2.concat("]}");
