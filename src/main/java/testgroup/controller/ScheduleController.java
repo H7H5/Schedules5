@@ -261,6 +261,7 @@ public class ScheduleController {
             test2 = test2.concat("\"year\":\"" + replacements.get(i).getYear() + "\",");
             test2 = test2.concat("\"month\":\"" + replacements.get(i).getMonth() + "\",");
             test2 = test2.concat("\"day\":\"" + replacements.get(i).getDay() + "\",");
+            test2 = test2.concat("\"number\":\"" + replacements.get(i).getNumber() + "\",");
             test2 = test2.concat("\"old_name\":\"" + replacements.get(i).getOld_name() + "\",");
             test2 = test2.concat("\"old_teacher1\":\"" + replacements.get(i).getOld_teacher1() + "\",");
             test2 = test2.concat("\"old_teacher2\":\"" + replacements.get(i).getNew_teacher2() + "\",");
