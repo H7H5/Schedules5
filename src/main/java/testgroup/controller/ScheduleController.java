@@ -245,6 +245,7 @@ public class ScheduleController {
     }
     @RequestMapping(value = "/JsonReplacement", method = RequestMethod.GET)
     public ModelAndView JsonReplacements( ){
+        replacementService.allParseReplacement();
         List<Replacement> replacements = replacementService.allReplacement();
         ModelAndView modelAndView = new ModelAndView();
         // modelAndView.setViewName("schedules");
@@ -374,4 +375,21 @@ public class ScheduleController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/parseReplacements",method = RequestMethod.GET)
+    public ModelAndView parseReplacement(){
+        List<Replacement> replacements = replacementService.allParseReplacement();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("parseReplacement");
+        modelAndView.addObject("replacementsList",replacements);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/DeleteAllReplacement", method = RequestMethod.GET)
+    public ModelAndView DeleteAllReplacement( ){
+        replacementService.deleteAllReplacement();
+        List<Replacement> replacements = replacementService.allReplacement();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("replacements");
+        modelAndView.addObject("replacementsList",replacements);
+        return modelAndView;
+    }
 }

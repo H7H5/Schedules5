@@ -10,7 +10,7 @@
 <a href="${schedules}">All Schedules</a>
 <table>
     <tr>
-        <th>group</th>
+        <th>groupp</th>
     </tr>
     <c:forEach var="grup" items="${grup}">
         <tr>

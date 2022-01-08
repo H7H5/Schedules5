@@ -2,9 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Replacements</title>
-</head>
-<body>
+    <title>ParseReplacement</title>
+</head><body>
 <h2>Add</h2>
 <c:url value="/addReplacement" var="add"/>
 <a href="${add}">Add new replacement</a>
@@ -52,7 +51,5 @@
 
 </table>
 <a href="/JsonReplacement">JsonReplacement</a>
-<br>
-<a href="/DeleteAllReplacement">Delete All Replacement</a>
 </body>
 </html>

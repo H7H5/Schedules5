@@ -13,7 +13,7 @@
 <table>
     <tr>
         <th>id</th>
-        <th>group</th>
+        <th>groupp</th>
         <th>day</th>
         <th>number</th>
         <th>name</th>

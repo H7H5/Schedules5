@@ -41,5 +41,8 @@
 </form>
 <c:url value="/replacements" var="replacements"/>
 <a href="${replacements}">All Replacements</a>
+<br>
+<c:url value="/parseReplacements" var="parseReplacements"/>
+<a href="${parseReplacements}">Parse Replacement</a>
 </body>
 </html>
