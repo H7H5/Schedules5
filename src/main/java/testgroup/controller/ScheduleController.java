@@ -245,7 +245,7 @@ public class ScheduleController {
     }
     @RequestMapping(value = "/JsonReplacement", method = RequestMethod.GET)
     public ModelAndView JsonReplacements( ){
-        replacementService.allParseReplacement();
+        List<Replacement> replacements1 = replacementService.allParseReplacement();
         List<Replacement> replacements = replacementService.allReplacement();
         ModelAndView modelAndView = new ModelAndView();
         // modelAndView.setViewName("schedules");
