@@ -25,13 +25,17 @@ public class SortGroup {
                 break;
             }else{
                 String numLesson = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(1)).replace("\"", "\'");
-                String oldName = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(2)).replace("\"", "\'");
-                String oldTeacher = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(3)).replace("\"", "\'");
-                String newName = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(4)).replace("\"", "\'");
-                String newTeacher = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(5)).replace("\"", "\'");
-                String auditory = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(6)).replace("\"", "\'");
-                lessonReplacements.add(new LessonReplacement(numRow,numGroup,numLesson,oldName,oldTeacher,"",
-                        newName,newTeacher,"",auditory));
+                if(numLesson==null||numLesson.equals("")){
+
+                }else {
+                    String oldName = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(2)).replace("\"", "\'");
+                    String oldTeacher = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(3)).replace("\"", "\'");
+                    String newName = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(4)).replace("\"", "\'");
+                    String newTeacher = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(5)).replace("\"", "\'");
+                    String auditory = getCellText(wb.getSheetAt(sheet).getRow(numRow).getCell(6)).replace("\"", "\'");
+                    lessonReplacements.add(new LessonReplacement(numRow, numGroup, numLesson, oldName, oldTeacher, "",
+                            newName, newTeacher, "", auditory));
+                }
             }
             numRow++;
         }
