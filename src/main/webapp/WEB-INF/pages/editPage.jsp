@@ -51,10 +51,10 @@
 
 
 
-    <c:if test="${empty lessonParseSchedule.name}">
+    <c:if test="${empty lesson.name}">
         <input type="submit" value="Add new Lesson">
     </c:if>
-    <c:if test="${!empty lessonParseSchedule.name}">
+    <c:if test="${!empty lesson.name}">
         <input type="submit" value="Edit Lesson">
     </c:if>
 </form>
