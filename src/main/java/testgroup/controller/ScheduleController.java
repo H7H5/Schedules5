@@ -145,7 +145,7 @@ public class ScheduleController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
         modelAndView.addObject("lesson", lesson);
-        modelAndView.addObject("lesson", lessonService.getById(id));
+        //modelAndView.addObject("lesson", lessonService.getById(id));
         return modelAndView;
     }
     @RequestMapping(value = "/editReplacement/{id}", method = RequestMethod.GET)
