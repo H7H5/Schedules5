@@ -1,4 +1,4 @@
-package testgroup.service.ParseReplacement;
+package testgroup.service.parseReplacement;
 
 import org.apache.poi.util.IOUtils;
 import org.springframework.stereotype.Service;

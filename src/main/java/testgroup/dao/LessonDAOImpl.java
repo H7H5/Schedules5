@@ -1,13 +1,20 @@
 package testgroup.dao;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 import testgroup.model.Lesson;
+
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@EnableTransactionManagement
 public class LessonDAOImpl implements LessonDAO {
     private SessionFactory sessionFactory;
 
@@ -19,8 +26,14 @@ public class LessonDAOImpl implements LessonDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Lesson> allLessons() {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Lesson").list();
+        Session session;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        return session.createQuery("FROM Lesson").list();
     }
 
     @Override
@@ -86,17 +99,36 @@ public class LessonDAOImpl implements LessonDAO {
 
     @Override
     public void add(Lesson lesson) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
         session.persist(lesson);
     }
+    @Transactional
     @Override
     public void delete(Lesson lesson) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
         session.delete(lesson);
     }
+
+
     @Override
     public void edit(Lesson lesson) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session;
+
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
         session.update(lesson);
     }
     @Override

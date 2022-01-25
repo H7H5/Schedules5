@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import testgroup.dao.LessonDAO;
 import org.springframework.transaction.annotation.Transactional;
 import testgroup.model.Lesson;
+import testgroup.model.Replacement;
+import testgroup.service.parseSchedules.ConnectionParseSchedules;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,5 +72,28 @@ public class LessonServiceImpl implements LessonService {
     @Transactional
     public Lesson getById(int id) {
         return lessonDAO.getById(id);
+    }
+
+
+    @Override
+    @Transactional
+    public void parseSchedules() {
+        try {
+            ConnectionParseSchedules connectionParseSchedules = new ConnectionParseSchedules();
+            ArrayList<Lesson> lessons = connectionParseSchedules.connectionAndParse();
+            addNewParseLesson(lessons);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    @Transactional
+    public void addNewParseLesson(List<Lesson> lessons){
+        for (int i = 0; i < lessons.size(); i++) {
+            System.out.println(lessons.get(i).toString());
+            add(lessons.get(i));
+        }
+
     }
 }

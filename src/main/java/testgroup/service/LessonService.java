@@ -13,4 +13,6 @@ public interface LessonService {
     void delete(Lesson lesson);
     void edit(Lesson lesson);
     Lesson getById(int id);
+    void parseSchedules();
+    void addNewParseLesson(List<Lesson> lessons);
 }

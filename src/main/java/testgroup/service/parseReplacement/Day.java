@@ -1,4 +1,4 @@
-package testgroup.service.ParseReplacement;
+package testgroup.service.parseReplacement;
 
 public class Day {
     private int day;

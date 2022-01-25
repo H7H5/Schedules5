@@ -1,4 +1,4 @@
-package testgroup.service.ParseReplacement;
+package testgroup.service.parseReplacement;
 
 import testgroup.model.Replacement;
 

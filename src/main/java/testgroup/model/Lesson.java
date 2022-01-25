@@ -110,7 +110,7 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return "Lesson{" +
+        return "LessonParseSchedule{" +
                 "id=" + id +
                 ", groupp='" + groupp + '\'' +
                 ", day='" + day + '\'' +

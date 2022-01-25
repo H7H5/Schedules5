@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import testgroup.dao.ReplacementDAO;
 import testgroup.model.Replacement;
-import testgroup.service.ParseReplacement.ConnectionParse;
+import testgroup.service.parseReplacement.ConnectionParse;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

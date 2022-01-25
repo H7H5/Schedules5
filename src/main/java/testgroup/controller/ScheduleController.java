@@ -112,7 +112,6 @@ public class ScheduleController {
         List<Lesson> lessons = lessonService.allLesson();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("schedules");
-        //modelAndView.setViewName("selectGroup");
         modelAndView.addObject("lessonsList", lessons);
         return modelAndView;
     }
@@ -390,6 +389,25 @@ public class ScheduleController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("replacements");
         modelAndView.addObject("replacementsList",replacements);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/deleteSchedules",method = RequestMethod.GET)
+    public ModelAndView deleteSchedules(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/schedules");
+        List<Lesson> lessons = lessonService.allLesson();
+        for (int i = 0; i <lessons.size() ; i++) {
+            Lesson lesson = lessonService.getById(lessons.get(i).getId());
+            lessonService.delete(lesson);
+        }
+        return modelAndView;
+    }
+    @RequestMapping(value = "/parseSchedules",method = RequestMethod.GET)
+    public ModelAndView parseSchedules(){
+        lessonService.parseSchedules();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/schedules");
         return modelAndView;
     }
 }

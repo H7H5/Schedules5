@@ -44,5 +44,12 @@
 <br>
 <c:url value="/parseReplacements" var="parseReplacements"/>
 <a href="${parseReplacements}">Parse Replacement</a>
+<br>
+
+<c:url value="/deleteSchedules" var="deleteSchedules"/>
+<a href="${deleteSchedules}">Delete Schedules</a>
+<br>
+<c:url value="/parseSchedules" var="parseSchedules"/>
+<a href="${parseSchedules}">Parse Schedules</a>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <body>
 <h2>Add</h2>
 <c:url value="/add" var="add"/>
-<a href="${add}">Add new lesson</a>
+<a href="${add}">Add new lessonParseSchedule</a>
 
 <h2>Lessons</h2>
 <table>
@@ -22,20 +22,20 @@
         <th>study</th>
         <th>numerator</th>
     </tr>
-    <c:forEach var="lesson" items="${lessonsList}">
+    <c:forEach var="lessonParseSchedule" items="${lessonsList}">
         <tr>
-            <td>${lesson.id}</td>
-            <td>${lesson.groupp}</td>
-            <td>${lesson.day}</td>
-            <td>${lesson.number}</td>
-            <td>${lesson.name}</td>
-            <td>${lesson.teacher}</td>
-            <td>${lesson.teacher2}</td>
-            <td>${lesson.study}</td>
-            <td>${lesson.numerator}</td>
+            <td>${lessonParseSchedule.id}</td>
+            <td>${lessonParseSchedule.groupp}</td>
+            <td>${lessonParseSchedule.day}</td>
+            <td>${lessonParseSchedule.number}</td>
+            <td>${lessonParseSchedule.name}</td>
+            <td>${lessonParseSchedule.teacher}</td>
+            <td>${lessonParseSchedule.teacher2}</td>
+            <td>${lessonParseSchedule.study}</td>
+            <td>${lessonParseSchedule.numerator}</td>
             <td>
-                <a href="/edit/${lesson.id}">edit</a>
-                <a href="/delete/${lesson.id}">delete</a>
+                <a href="/edit/${lessonParseSchedule.id}">edit</a>
+                <a href="/delete/${lessonParseSchedule.id}">delete</a>
             </td>
         </tr>
     </c:forEach>
