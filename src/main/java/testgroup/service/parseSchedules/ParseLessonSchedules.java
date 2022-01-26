@@ -39,7 +39,17 @@ public class ParseLessonSchedules {
                         }
                         lessonParseSchedule.setStudy(getStudy(wb, groupCellDTO, i, getNumerator(wb, groupCellDTO, i)));
                         lessonParseSchedule.setNumerator(getNumerator(wb, groupCellDTO, i));
-                        lessonParseSchedules.add(lessonParseSchedule);
+                        ArrayList<Lesson> lessonsCoarch = checkOneLessonTwoNumerators(lessonParseSchedule, wb, groupCellDTO, i);
+                        //if (lessonsCoarch.size()>1){
+                            for (int k = 0; k <lessonsCoarch.size() ; k++) {
+                                lessonParseSchedules.add(lessonsCoarch.get(k));
+                            }
+                        //}else {
+                        //    lessonParseSchedules.add(lessonParseSchedule);
+                        //}
+
+
+                        //lessonParseSchedules.add(lessonParseSchedule);
                     }
                 }
             }
@@ -96,7 +106,6 @@ public class ParseLessonSchedules {
 
     private String getStudy(Workbook wb,GroupCellDTO groupCellDTO, int i, String numerator){
         String study = "";
-
         if (numerator.equals("null")){
             if (i % 2 != 0) {
                 String s1 = getCellText(wb.getSheetAt(groupCellDTO.sheet).
@@ -188,7 +197,47 @@ public class ParseLessonSchedules {
         return teachers;
     }
 
-
+    private ArrayList<Lesson> checkOneLessonTwoNumerators(Lesson lesson, Workbook wb, GroupCellDTO groupCellDTO, int i){
+        Lesson lesson1 = null;
+        ArrayList<Lesson>lessons = new ArrayList<>();
+        if (lesson.getNumerator().equals("null")){
+            boolean Numteachers = ExcelUtils.isMergedRegion(wb, groupCellDTO.sheet, groupCellDTO.row + i, groupCellDTO.cell+1);
+            if (!Numteachers){
+                lesson1 = new Lesson();
+                lesson1.setName(lesson.getName());
+                lesson1.setGroupp(lesson.getGroupp());
+                lesson1.setDay(lesson.getDay());
+                lesson1.setNumber(lesson.getNumber());
+                ArrayList<String> teachers = getTeachers(wb, groupCellDTO, i+1);
+                if (!teachers.get(0).isEmpty()) {
+                    lesson1.setTeacher(teachers.get(0));
+                }
+                if (teachers.size() > 1) {
+                    lesson1.setTeacher2(teachers.get(1));
+                }
+                lesson1.setNumerator("denominator");
+                if (!ExcelUtils.isMergedRegion(wb, groupCellDTO.sheet, groupCellDTO.row + i, groupCellDTO.cell-1)){
+                    lesson1.setStudy(getStudy(wb, groupCellDTO, i,"denominator" ));
+                    lesson.setStudy(getStudy(wb, groupCellDTO, i,"numerator" ));
+                }else {
+                    lesson1.setStudy(lesson.getStudy());
+                }
+                lesson.setNumerator("numerator");
+                System.out.println(lesson.toString());
+                System.out.println(lesson1.toString());
+                for (int j = 0; j <10; j++) {
+                    System.out.println("--");
+                }
+            }
+        }
+        if (lesson1==null){
+            lessons.add(lesson);
+        }else {
+            lessons.add(lesson);
+            lessons.add(lesson1);
+        }
+        return lessons;
+    }
 
 
 
