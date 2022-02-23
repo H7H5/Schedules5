@@ -19,21 +19,34 @@ public class ParseDay {
         String data = SortGroup.getCellText(wb.getSheetAt(sheet).getRow(startRow).getCell(0));
         String delimiter = "\"";
         String[] subData = data.split(delimiter);
-        int day;
-        int monthInt;
-        int year;
-        try {
-            day = Integer.parseInt(subData[1]);
-            delimiter = "\\s+";
-            data = subData[2];
-            subData = data.split(delimiter);
-            monthInt = getNumberMonth(subData[1]);
-            year = Integer.parseInt(subData[2]);
-        }catch (Exception e){
-            day = 999;
-            monthInt = 999;
-            year = 999;
+        int day = 999;
+        int monthInt = 999;
+        int year = 999;
+        if (subData.length==3){
+            try {
+                day = Integer.parseInt(subData[1]);
+                delimiter = "\\s+";
+                data = subData[2];
+                subData = data.split(delimiter);
+                monthInt = getNumberMonth(subData[1]);
+                year = Integer.parseInt(subData[2]);
+            }catch (Exception e){
+
+            }
+        }else if(subData.length==2){
+            try {
+                String[] r = subData[0].split("\\D+");
+                day =  Integer.parseInt(String.join("", r));
+                delimiter = "\\s+";
+                data = subData[1];
+                subData = data.split(delimiter);
+                monthInt = getNumberMonth(subData[1]);
+                year = Integer.parseInt(subData[2]);
+            }catch (Exception e){
+
+            }
         }
+
         return new Day(day,monthInt,year);
     }
 
